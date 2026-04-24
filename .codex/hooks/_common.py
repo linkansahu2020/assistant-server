@@ -10,6 +10,7 @@ RELEVANT_CHANGE_PATTERN = re.compile(
     r"(^src/|^test/|^package(-lock)?\.json$|^tsconfig(\..+)?\.json$|^nest-cli\.json$|^eslint\.config\.)"
 )
 VALIDATION_PATTERN = re.compile(r"\bnpm run (lint|test|build)\b|validation passed", re.IGNORECASE)
+REQUIRED_VALIDATION_PATTERN = re.compile(r"\bnpm run (lint|typecheck)\b", re.IGNORECASE)
 
 
 def read_payload():
@@ -58,6 +59,10 @@ def message_mentions_validation(message):
     return bool(message and VALIDATION_PATTERN.search(message))
 
 
+def message_mentions_required_validation(message):
+    return bool(message and REQUIRED_VALIDATION_PATTERN.search(message))
+
+
 def is_destructive_command(command):
     patterns = [
         r"\brm\s+-rf\b",
@@ -73,6 +78,7 @@ def is_destructive_command(command):
 def is_project_validation_command(command):
     safe_commands = [
         r"^\s*npm run lint\b",
+        r"^\s*npm run typecheck\b",
         r"^\s*npm run test\b",
         r"^\s*npm run build\b",
         r"^\s*git status\b",
