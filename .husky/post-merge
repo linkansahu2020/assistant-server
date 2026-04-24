@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+echo "Running lint autofix after merge..."
+npm run lint

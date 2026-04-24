@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+echo "Running lint autofix after applying patch..."
+npm run lint
