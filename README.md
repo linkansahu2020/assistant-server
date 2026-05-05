@@ -31,6 +31,25 @@
 $ npm install
 ```
 
+## Database setup
+
+This project connects to a Supabase Postgres database through TypeORM.
+
+Create a `.env` file from `.env.example`, then set:
+
+```bash
+DATABASE_URL=postgresql://postgres.your-project-ref:your-password@aws-0-your-region.pooler.supabase.com:6543/postgres
+DB_SSL=true
+```
+
+You can find the connection string in Supabase under Project Settings > Database > Connection string. Use the transaction pooler URL for most hosted deployments.
+
+To verify the connection after starting the server:
+
+```bash
+curl http://localhost:3000/database/health
+```
+
 ## Compile and run the project
 
 ```bash
